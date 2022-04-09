@@ -42,4 +42,4 @@ def  part_list_entries(title):
     """
     _, filenames = default_storage.listdir("entries")
     return list(sorted(re.sub(r"\.md$", "", filename)
-                for filename in filenames if filename.endswith(".md")))
+                for filename in filenames if re.search(title,filename,re.I) != None))
