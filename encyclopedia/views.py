@@ -16,11 +16,12 @@ def search(request):
     Entry =util.get_entry(title)
     if Entry == None:
         list=util.part_list_entries(title)
-        if list == None:
-         return HttpResponseNotFound("Not Found")
-        else: return render(request,"encyclopedia/index.html",{
+        if list:
+         return render(request,"encyclopedia/index.html",{
             "entries":list
         })
+        else: 
+            return HttpResponseNotFound("Not Found")
     else: return render(request, "encyclopedia/display.html", {
         "searchname":title,
         "Entry":markdown.markdown(Entry),
